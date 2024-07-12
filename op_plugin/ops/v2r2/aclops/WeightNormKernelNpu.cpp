@@ -14,7 +14,7 @@
 // limitations under the License.
 
 #include "op_plugin/AclOpsInterface.h"
-#include "torch_npu/csrc/core/npu/NPUException.h"
+#include "npu/core/NPUException.h"
 
 namespace acl_op {
 at::Tensor _weight_norm(const at::Tensor& v_in, const at::Tensor& g_in, int64_t dim) {

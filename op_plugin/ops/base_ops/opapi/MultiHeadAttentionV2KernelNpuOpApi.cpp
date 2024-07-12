@@ -14,8 +14,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "torch_npu/csrc/framework/utils/RandomOpAdapter.h"
-#include "torch_npu/csrc/aten/CustomFunctions.h"
+#include "npu/framework/utils/RandomOpAdapter.h"
+#include "csrc/aten/generated/CustomFunctions.h"
 #include "op_plugin/OpApiInterface.h"
 #include "op_plugin/utils/op_api_common.h"
 

@@ -18,7 +18,7 @@
 
 #include "op_plugin/AclOpsInterface.h"
 #include "op_plugin/utils/OpAdapter.h"
-#include "torch_npu/csrc/framework/utils/UtilForOpAdapter.h"
+#include "npu/framework/utils/UtilForOpAdapter.h"
 
 namespace acl_op {
 static const int64_t INDICES_TYPE_CONVERT = 2;

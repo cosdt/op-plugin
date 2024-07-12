@@ -16,7 +16,7 @@
 #include "op_plugin/AclOpsInterface.h"
 #include "op_plugin/utils/OpAdapter.h"
 
-#include "torch_npu/csrc/framework/utils/InternalFormatOpAdapter.h"
+#include "npu/framework/utils/InternalFormatOpAdapter.h"
 
 namespace acl_op {
 using npu_format_helper = at_npu::native::FormatHelper;

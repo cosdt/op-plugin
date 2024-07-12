@@ -19,6 +19,6 @@
 #include "op_plugin/utils/OpConstants.h"
 #include "op_plugin/utils/OpUtils.h"
 
-#include "torch_npu/csrc/framework/OpCommand.h"
-#include "torch_npu/csrc/framework/utils/OpPreparation.h"
-#include "torch_npu/csrc/aten/CustomFunctions.h"
+#include "npu/framework/OpCommand.h"
+#include "npu/framework/utils/OpPreparation.h"
+#include "csrc/aten/generated/CustomFunctions.h"

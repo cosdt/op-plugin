@@ -16,8 +16,8 @@
 
 #include "op_plugin/AclOpsInterface.h"
 
-#include "torch_npu/csrc/framework/utils/InternalFormatOpAdapter.h"
-#include "torch_npu/csrc/framework/utils/UtilForOpAdapter.h"
+#include "npu/framework/utils/InternalFormatOpAdapter.h"
+#include "npu/framework/utils/UtilForOpAdapter.h"
 
 #include "op_plugin/utils/OpAdapter.h"
 

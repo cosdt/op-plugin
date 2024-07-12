@@ -16,8 +16,8 @@
 #include "op_plugin/AclOpsInterface.h"
 #include "op_plugin/OpApiInterface.h"
 #include "op_plugin/utils/op_api_common.h"
-#include "torch_npu/csrc/framework/utils/UtilForOpAdapter.h"
-#include "third_party/acl/inc/acl/acl_rt.h"
+#include "npu/framework/utils/UtilForOpAdapter.h"
+#include "npu/acl/include/acl/acl_rt.h"
 
 namespace op_api {
 using npu_preparation = at_npu::native::OpPreparation;

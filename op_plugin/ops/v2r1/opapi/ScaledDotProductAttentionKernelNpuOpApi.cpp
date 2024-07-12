@@ -17,7 +17,7 @@
 #include "op_plugin/AclOpsInterface.h"
 #include "op_plugin/OpApiInterface.h"
 #include "op_plugin/utils/OpAdapter.h"
-#include "torch_npu/csrc/framework/utils/UtilForOpAdapter.h"
+#include "npu/framework/utils/UtilForOpAdapter.h"
 
 namespace op_api {
 const static int64_t ATTENMASK_LIMIT = 2048;

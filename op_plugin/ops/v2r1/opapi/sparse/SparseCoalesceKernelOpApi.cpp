@@ -19,7 +19,7 @@
 #include <torch/torch.h>
 #include <ATen/native/NonSymbolicBC.h>
 
-#include "torch_npu/csrc/core/npu/DeviceUtils.h"
+#include "npu/core/DeviceUtils.h"
 #include "op_plugin/SparseOpsInterface.h"
 #include "op_plugin/OpApiInterface.h"
 #include "op_plugin/utils/op_api_common.h"

@@ -17,7 +17,7 @@
 #include <ATen/native/SparseTensorUtils.h>
 #include <torch/torch.h>
 
-#include "torch_npu/csrc/core/npu/NPUException.h"
+#include "npu/core/NPUException.h"
 
 namespace sparse {
 using namespace at::sparse;
