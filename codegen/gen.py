@@ -77,17 +77,16 @@ class FileManager:
     @staticmethod
     def _write_if_changed(filename: str, contents: str) -> None:
         old_contents: Optional[str]
-        filepath = os.path.realpath(filename)
         try:
-            with open(filepath, 'r') as f:
+            with open(filename) as f:
                 old_contents = f.read()
-        except IOError:
+        except OSError:
             old_contents = None
         if contents != old_contents:
-            FileManager._remove_path_safety(filepath)
-            with os.fdopen(os.open(filepath, os.O_RDWR | os.O_CREAT, stat.S_IWUSR | stat.S_IRUSR), "w") as f:
+            # Create output directory if it doesn't exist
+            os.makedirs(os.path.dirname(filename), exist_ok=True)
+            with open(filename, "w") as f:
                 f.write(contents)
-            os.chmod(filepath, stat.S_IRUSR | stat.S_IEXEC | stat.S_IRGRP | stat.S_IXGRP)
 
     def write_with_template(self, filename: str, template_fn: str,
                             env_callable: Callable[[], Union[str, Dict[str, Any]]]) -> None:
