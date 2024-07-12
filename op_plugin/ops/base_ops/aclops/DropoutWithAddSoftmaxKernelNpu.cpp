@@ -15,7 +15,7 @@
 
 #include "op_plugin/AclOpsInterface.h"
 #include "op_plugin/utils/OpAdapter.h"
-#include "torch_npu/csrc/framework/utils/RandomOpAdapter.h"
+#include "npu/framework/utils/RandomOpAdapter.h"
 
 namespace acl_op {
 using npu_preparation = at_npu::native::OpPreparation;

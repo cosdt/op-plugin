@@ -27,11 +27,11 @@
 #include "op_plugin/utils/KernelNpuOutputSize.h"
 #include "op_plugin/utils/OpConstants.h"
 #include "op_plugin/utils/OpUtils.h"
-#include "torch_npu/csrc/core/npu/NPUStream.h"
-#include "torch_npu/csrc/framework/OpCommand.h"
-#include "torch_npu/csrc/framework/utils/OpPreparation.h"
-#include "torch_npu/csrc/framework/interface/EnvVariables.h"
-#include "torch_npu/csrc/aten/NPUNativeFunctions.h"
+#include "csrc/npu/NPUStream.h"
+#include "npu/framework/OpCommand.h"
+#include "npu/framework/utils/OpPreparation.h"
+#include "npu/framework/interface/EnvVariables.h"
+#include "csrc/aten/generated/NPUNativeFunctions.h"
 
 typedef struct aclOpExecutor aclOpExecutor;
 typedef struct aclTensor aclTensor;

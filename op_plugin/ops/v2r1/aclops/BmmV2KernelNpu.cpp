@@ -15,7 +15,7 @@
 
 #include "op_plugin/AclOpsInterface.h"
 #include "op_plugin/utils/custom_functions/aclops/inner_compute.h"
-#include "torch_npu/csrc/core/npu/NPUException.h"
+#include "npu/core/NPUException.h"
 
 
 namespace acl_op {

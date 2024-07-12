@@ -14,7 +14,7 @@
 // limitations under the License.
 
 #include "op_plugin/AclOpsInterface.h"
-#include "torch_npu/csrc/core/npu/NPUException.h"
+#include "npu/core/NPUException.h"
 
 
 namespace acl_op {

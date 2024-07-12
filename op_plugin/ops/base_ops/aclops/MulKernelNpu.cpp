@@ -16,8 +16,8 @@
 
 #include "op_plugin/AclOpsInterface.h"
 #include "op_plugin/utils/OpAdapter.h"
-#include "torch_npu/csrc/framework/utils/InternalFormatOpAdapter.h"
-#include "torch_npu/csrc/framework/utils/UtilForOpAdapter.h"
+#include "npu/framework/utils/InternalFormatOpAdapter.h"
+#include "npu/framework/utils/UtilForOpAdapter.h"
 
 namespace acl_op {
 using npu_preparation = at_npu::native::OpPreparation;

@@ -16,7 +16,7 @@
 
 #include "op_plugin/AclOpsInterface.h"
 #include "op_plugin/OpApiInterface.h"
-#include "torch_npu/csrc/framework/utils/RandomOpAdapter.h"
+#include "npu/framework/utils/RandomOpAdapter.h"
 #include "op_plugin/utils/op_api_common.h"
 
 namespace op_api {

@@ -15,7 +15,7 @@
 
 
 #include "op_plugin/OpApiInterface.h"
-#include "torch_npu/csrc/framework/utils/RandomOpAdapter.h"
+#include "npu/framework/utils/RandomOpAdapter.h"
 
 namespace op_api {
 at::Tensor& exponential_(at::Tensor& self, double lambda, c10::optional<at::Generator> generator)

@@ -15,7 +15,7 @@
 // limitations under the License.
 
 #include <climits>
-#include "torch_npu/csrc/framework/utils/RandomOpAdapter.h"
+#include "npu/framework/utils/RandomOpAdapter.h"
 
 #include "op_plugin/utils/OpAdapter.h"
 #include "op_plugin/AclOpsInterface.h"

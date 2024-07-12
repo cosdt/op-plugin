@@ -18,7 +18,7 @@
 
 #include <ATen/ATen.h>
 
-#include "torch_npu/csrc/core/npu/NPUMacros.h"
+#include "npu/core/NPUMacros.h"
 
 namespace at_npu {
 namespace native {

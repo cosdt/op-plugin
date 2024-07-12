@@ -18,8 +18,8 @@
 #include "op_plugin/OpApiInterface.h"
 #include "op_plugin/OpInterface.h"
 #include "op_plugin/SparseOpsInterface.h"
-#include "torch_npu/csrc/framework/interface/EnvVariables.h"
-#include "torch_npu/csrc/framework/FormatHelper.h"
+#include "npu/framework/interface/EnvVariables.h"
+#include "npu/framework/FormatHelper.h"
 
 namespace ${namespace} {
 ${declarations}

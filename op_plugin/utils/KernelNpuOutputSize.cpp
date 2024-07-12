@@ -16,7 +16,7 @@
 #include <bitset>
 #include "op_plugin/utils/KernelNpuOutputSize.h"
 #include "op_plugin/utils/AdvancedIndex.h"
-#include "torch_npu/csrc/core/npu/NPUException.h"
+#include "npu/core/NPUException.h"
 
 namespace op_infer {
 using tuple_array_vector = std::tuple<c10::IntArrayRef, c10::IntArrayRef, c10::SmallVector<int64_t, SIZE>>;
