@@ -55,12 +55,7 @@ std::tuple<at::Tensor, at::Tensor, at::Tensor> npu_dropout_with_add_softmax_forw
     double retain = 1. - p;
     at::Scalar prob = at::Scalar(retain);
     at::Tensor mask;
-    auto original_stream = c10_npu::getCurrentNPUStream();
-    {
-        c10_npu::SecondaryStreamGuard guard(c10_npu::getCurrentSecondaryStream());
-        mask = dropout_genmask(x1, prob);
-    }
-    c10_npu::NPUCachingAllocator::recordStream(mask.storage().data_ptr(), original_stream);
+    mask = dropout_genmask(x1, prob);
 
     at_npu::native::OpCommand cmd;
     cmd.Name("AxpyWithSoftmaxAndDropOutDoMask")
