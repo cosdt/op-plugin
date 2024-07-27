@@ -18,11 +18,11 @@
 
 #include <ATen/ATen.h>
 
-#include "npu/core/NPUMacros.h"
+#include "csrc/core/Macros.h"
 
 namespace at_npu {
 namespace native {
-TORCH_NPU_API at::Tensor npu_dropout_gen_mask(const at::Tensor &self, at::IntArrayRef size, double p, int64_t seed,
+TORCH_BACKEND_API at::Tensor npu_dropout_gen_mask(const at::Tensor &self, at::IntArrayRef size, double p, int64_t seed,
                                               int64_t offset, c10::optional<bool> parallel, c10::optional<bool> sync);
 }
 }  // namespace at_npu
