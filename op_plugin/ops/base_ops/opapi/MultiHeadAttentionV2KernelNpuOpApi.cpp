@@ -74,22 +74,7 @@ at::Tensor gen_mask_dispatch(const at::Tensor &self, const at::Scalar &keep_prob
 {
     at::Tensor mask;
 
-    if (gen_mask_parallel) {
-        auto original_stream = c10_npu::getCurrentNPUStream();
-        {
-            // During the life cycle of this raii instance, the calcu stream is set as the
-            // secondary stream, and tasks are distributed to the secondary stream. At the
-            // same time, according to the one-stream-one-pool principle, memory is also
-            // alloced from the pool of the secondary stream.
-            c10_npu::SecondaryStreamGuard guard(c10_npu::getCurrentSecondaryStream());
-            mask = gen_mask_impl(self, keep_prob, seed, offset, numels);
-            if (sync) {
-                OPS_CHECK_ERROR(c10_npu::acl::AclrtSynchronizeStreamWithTimeout(original_stream));
-            }
-        }
-    } else {
-        mask = gen_mask_impl(self, keep_prob, seed, offset, numels);
-    }
+    mask = gen_mask_impl(self, keep_prob, seed, offset, numels);
     return mask;
 }
 
@@ -218,11 +203,6 @@ std::tuple<at::Tensor, at::Tensor, at::Tensor> npu_multi_head_attention_v2_grad(
                                                         scale, head_num, input_layout_str, keep_prob,
                                                         pre_tokens, next_tokens, gen_mask_parallel, sync);
 
-    if (!sync) {
-        c10_npu::NPUEvent npu_event;
-        npu_event.record(c10_npu::getCurrentNPUStream());
-        npu_event.block(c10_npu::getCurrentSecondaryStream());
-    }
     return results;
 }
 
@@ -286,12 +266,6 @@ std::tuple<at::Tensor, at::Tensor, int64_t, int64_t, int64_t> npu_multi_head_att
                                  format_query, format_key, format_value, format_atten_mask, format_alibi_mask,
                                  format_drop_mask, scale, head_num, input_layout_ptr, keep_prob, pre_tokens,
                                  next_tokens, softmax_log_max_sum, attention_score);
-
-    if (!sync) {
-        c10_npu::NPUEvent npu_event;
-        npu_event.record(c10_npu::getCurrentNPUStream());
-        npu_event.block(c10_npu::getCurrentSecondaryStream());
-    }
 
     return std::make_tuple(attention_score, softmax_log_max_sum, seed, offset, numels);
 }

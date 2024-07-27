@@ -640,7 +640,7 @@ auto DecodeDevice(Ts&... args) -> at::Device
         TORCH_CHECK(getWorkspaceSizeFuncAddr != nullptr && opApiFuncAddr != nullptr, #aclnn_api, " or ",               \
                     #aclnn_api "GetWorkspaceSize", " not in ", GetOpApiLibName(), ", or ", GetOpApiLibName(),          \
                     "not found.", OPS_ERROR(ErrCode::PTR));                                                            \
-        auto acl_stream = c10_npu::getCurrentNPUStream().stream(false);                                                \
+        auto acl_stream = c10_npu::getCurrentNPUStream().stream();                                                     \
         uint64_t workspace_size = 0;                                                                                   \
         uint64_t *workspace_size_addr = &workspace_size;                                                               \
         aclOpExecutor *executor = nullptr;                                                                             \
@@ -757,7 +757,7 @@ auto DecodeDevice(Ts&... args) -> at::Device
         TORCH_CHECK(getWorkspaceSizeFuncAddr != nullptr && opApiFuncAddr != nullptr, #aclnn_api, " or ",               \
                     #aclnn_api "GetWorkspaceSize", " not in ", GetOpApiLibName(), ", or ", GetOpApiLibName(),          \
                     "not found.", OPS_ERROR(ErrCode::PTR));                                                            \
-        auto acl_stream = c10_npu::getCurrentNPUStream().stream(false);                                                \
+        auto acl_stream = c10_npu::getCurrentNPUStream().stream();                                                     \
         uint64_t workspace_size = 0;                                                                                   \
         uint64_t *workspace_size_addr = &workspace_size;                                                               \
         aclOpExecutor *executor = nullptr;                                                                             \
@@ -879,7 +879,7 @@ private:
         TORCH_CHECK(getWorkspaceSizeFuncAddr != nullptr && opApiFuncAddr != nullptr, #aclnn_api, " and ",              \
                     #aclnn_api "GetWorkspaceSize", " not in ", GetOpApiLibName(), ", or ", GetOpApiLibName(),          \
                     "not found.", OPS_ERROR(ErrCode::PTR));                                                            \
-        auto acl_stream = c10_npu::getCurrentNPUStream().stream(false);                                                \
+        auto acl_stream = c10_npu::getCurrentNPUStream().stream();                                                     \
         uint64_t workspace_size = 0;                                                                                   \
         uint64_t *workspace_size_addr = &workspace_size;                                                               \
         aclOpExecutor *executor = nullptr;                                                                             \

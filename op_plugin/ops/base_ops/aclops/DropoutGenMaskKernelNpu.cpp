@@ -57,22 +57,7 @@ at::Tensor _npu_dropout_gen_mask(const at::Tensor &self, at::IntArrayRef size, d
     at::Tensor mask;
     bool parallel_value = parallel.value_or(true);
     bool sync_value = sync.value_or(false);
-    if (parallel_value) {
-        auto original_stream = c10_npu::getCurrentNPUStream();
-        {
-            // During the life cycle of this raii instance, the calcu stream is set as the
-            // secondary stream, and tasks are distributed to the secondary stream. At the
-            // same time, according to the one-stream-one-pool principle, memory is also
-            // alloced from the pool of the secondary stream.
-            c10_npu::SecondaryStreamGuard guard(c10_npu::getCurrentSecondaryStream());
-            mask = gen_mask_impl(self, size, p, seed, offset);
-            if (sync_value) {
-                NPU_CHECK_ERROR(c10_npu::acl::AclrtSynchronizeStreamWithTimeout(original_stream));
-            }
-        }
-    } else {
-        mask = gen_mask_impl(self, size, p, seed, offset);
-    }
+    mask = gen_mask_impl(self, size, p, seed, offset);
     return mask;
 }
 }  // namespace acl_op

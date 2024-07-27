@@ -33,32 +33,22 @@ std::tuple<at::Tensor, at::Tensor> _npu_dropout(const at::Tensor& self, double p
   at::Tensor mask;
 
   auto original_stream = c10_npu::getCurrentNPUStream();
-  {
-    // During the life cycle of this raii instance, the calcu stream is set as the
-    // secondary stream, and tasks are distributed to the secondary stream. At the
-    // same time, according to the one-stream-one-pool principle, memory is also
-    // alloced from the pool of the secondary stream.
-    c10_npu::SecondaryStreamGuard guard(c10_npu::getCurrentSecondaryStream());
-    mask = at_npu::native::OpPreparation::apply_tensor_without_format({length}, self.options().dtype(at::kByte));
-    at::IntArrayRef shapeArray(self.sizes());
+  mask = at_npu::native::OpPreparation::apply_tensor_without_format({length}, self.options().dtype(at::kByte));
+  at::IntArrayRef shapeArray(self.sizes());
 
-    // DropOutGenMask use seed and seed1 to generator a seed, like this:
-    //  seed1   seed
-    // 127~64   63~0
-    // so, we set seed1 = 0 to ensure the seed which user set is equal to the seed
-    // used by the operator DropOutGenMask
-    const auto gen = at_npu::detail::getDefaultNPUGenerator();
-    auto pair = at::check_generator<at_npu::NPUGeneratorImpl>(gen)->philox_engine_inputs(10);
-    // At present, the default value of random number may be very large,
-    // which will cause overflow in graph mode, so we set seed = 0 to avoid it.
-    const uint64_t seed = pair.first;
-    const uint64_t offset = pair.second;
-    aclDataType dataType = at_npu::native::OpPreparation::convert_to_acl_data_type(self.scalar_type());
-    EXEC_NPU_CMD(aclnnDropoutGenMaskV2, shapeArray, p, seed, offset, dataType, mask);
-  }
-  // When tasks on multiple streams read and write the same block of memory,
-  // recordStream needs to be called to ensure the correctness of memory reuse.
-  c10_npu::NPUCachingAllocator::recordStream(mask.storage().data_ptr(), original_stream);
+  // DropOutGenMask use seed and seed1 to generator a seed, like this:
+  //  seed1   seed
+  // 127~64   63~0
+  // so, we set seed1 = 0 to ensure the seed which user set is equal to the seed
+  // used by the operator DropOutGenMask
+  const auto gen = at_npu::detail::getDefaultNPUGenerator();
+  auto pair = at::check_generator<at_npu::NPUGeneratorImpl>(gen)->philox_engine_inputs(10);
+  // At present, the default value of random number may be very large,
+  // which will cause overflow in graph mode, so we set seed = 0 to avoid it.
+  const uint64_t seed = pair.first;
+  const uint64_t offset = pair.second;
+  aclDataType dataType = at_npu::native::OpPreparation::convert_to_acl_data_type(self.scalar_type());
+  EXEC_NPU_CMD(aclnnDropoutGenMaskV2, shapeArray, p, seed, offset, dataType, mask);
 
   EXEC_NPU_CMD(aclnnDropoutDoMask, self, mask, p, result);
   return std::tie(result, mask);
